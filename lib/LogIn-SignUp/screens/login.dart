@@ -1,6 +1,7 @@
 import 'package:digital_detox/LogIn-SignUp/screens/signup.dart';
 import 'package:digital_detox/LogIn-SignUp/widgets/button.dart';
 import 'package:digital_detox/LogIn-SignUp/widgets/text_Field.dart';
+import 'package:digital_detox/Login%20with%20Google/google_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../Services/authentication.dart';
@@ -79,7 +80,39 @@ class _SignupScreenState extends State<LoginScreen> {
                   child: Text("ForgotPassword?",style: TextStyle(fontWeight:FontWeight.bold,fontSize: 16 ,color:Colors.blue),)),
             ),
             MyButtons(onTap: loginUsers, text: "Log In"),
-            SizedBox(height: height/15,),
+
+
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(children: [
+                Expanded(child:Container(height: 1,color: Colors.black,),)
+                ,const Text("   or   "),
+                Expanded(child:Container(height: 1,color: Colors.black,),)
+              ],),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white70),
+                  onPressed: () async{
+                    await FirebaseServices().signInWithGoogle();
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HomeScreen(),),);
+                  },
+                  child:Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset("images/google_logo.png",height: 35,),
+                      ),
+                      const Text("continue with google",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black45),),
+                    ],
+                  )
+              ),
+            ),
+
+            // const SizedBox(height: 20,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
